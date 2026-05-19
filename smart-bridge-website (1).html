@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Bridge — Bridging Silence & Sight</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #0d1117;
+    --ink-soft: #3d4451;
+    --ink-muted: #6b7280;
+    --surface: #f8f7f4;
+    --surface-alt: #efeee9;
+    --white: #ffffff;
+    --accent: #1a6b55;
+    --accent-light: #e1f5ee;
+    --accent-mid: #2a9e7c;
+    --amber: #c97a1a;
+    --amber-light: #faeeda;
+    --blue: #1a4f8b;
+    --blue-light: #e6f1fb;
+    --coral: #c04a25;
+    --coral-light: #faece7;
+    --border: rgba(13,17,23,0.1);
+    --border-strong: rgba(13,17,23,0.18);
+    --radius: 12px;
+    --radius-sm: 8px;
+    --radius-pill: 999px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--surface);
+    color: var(--ink);
+    line-height: 1.7;
+    font-size: 16px;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(248,247,244,0.88);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
+  }
+
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.25rem;
+    color: var(--accent);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+    display: flex; align-items: center; gap: 10px;
+  }
+
+  .nav-logo-icon {
+    width: 34px; height: 34px;
+    background: var(--accent);
+    border-radius: 9px;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .nav-logo-icon svg { width: 18px; height: 18px; fill: none; stroke: white; stroke-width: 2.2; stroke-linecap: round; }
+
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.88rem; font-weight: 500; color: var(--ink-soft);
+    text-decoration: none; letter-spacing: 0.01em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 92vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 4rem;
+    padding: 6rem 6rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #hero::before {
+    content: '';
+    position: absolute;
+    top: -120px; right: -120px;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle at center, rgba(26,107,85,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--accent-light);
+    color: var(--accent);
+    border: 1px solid rgba(26,107,85,0.2);
+    border-radius: var(--radius-pill);
+    padding: 6px 14px;
+    font-size: 0.8rem; font-weight: 500;
+    letter-spacing: 0.03em;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-eyebrow-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--accent);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.7); }
+  }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2.6rem, 4.5vw, 4rem);
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+  }
+
+  h1 .accent-word { color: var(--accent); }
+
+  .hero-desc {
+    font-size: 1.05rem;
+    color: var(--ink-soft);
+    line-height: 1.75;
+    max-width: 520px;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+  }
+
+  .hero-cta-group { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+  .btn-primary {
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: var(--radius-pill);
+    padding: 14px 28px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem; font-weight: 500;
+    cursor: pointer; text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-primary:hover { background: #165c48; transform: translateY(-1px); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--ink-soft);
+    border: 1.5px solid var(--border-strong);
+    border-radius: var(--radius-pill);
+    padding: 14px 28px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem; font-weight: 500;
+    cursor: pointer; text-decoration: none;
+    transition: border-color 0.2s, color 0.2s, transform 0.15s;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+
+  .hero-stats {
+    display: flex; gap: 2.5rem;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .hero-stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.8rem; font-weight: 700;
+    color: var(--ink); line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .hero-stat-label { font-size: 0.8rem; color: var(--ink-muted); font-weight: 400; }
+
+  /* ── PHONE MOCKUP ── */
+  .hero-visual {
+    display: flex; justify-content: center; align-items: center;
+    position: relative;
+  }
+
+  .phone-frame {
+    width: 260px; height: 520px;
+    background: var(--ink);
+    border-radius: 40px;
+    padding: 12px;
+    box-shadow: 0 40px 80px rgba(13,17,23,0.2), 0 0 0 1px rgba(255,255,255,0.06);
+    position: relative;
+    animation: floatPhone 4s ease-in-out infinite;
+  }
+
+  @keyframes floatPhone {
+    0%, 100% { transform: translateY(0px) rotate(-2deg); }
+    50% { transform: translateY(-12px) rotate(-2deg); }
+  }
+
+  .phone-screen {
+    width: 100%; height: 100%;
+    background: #0f1923;
+    border-radius: 30px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .phone-notch {
+    position: absolute; top: 10px; left: 50%; transform: translateX(-50%);
+    width: 90px; height: 26px;
+    background: var(--ink);
+    border-radius: 20px;
+    z-index: 5;
+  }
+
+  .phone-ui {
+    padding: 50px 16px 16px;
+    height: 100%;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+
+  .phone-header {
+    text-align: center; color: white;
+    font-family: 'Syne', sans-serif; font-size: 0.85rem; font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .phone-header span { color: #3ecf9e; }
+
+  .phone-chat-bubble {
+    border-radius: 14px;
+    padding: 10px 13px;
+    font-size: 0.7rem; line-height: 1.5;
+    max-width: 85%;
+  }
+
+  .bubble-left {
+    background: #1e2d3d;
+    color: #c8d8e8;
+    align-self: flex-start;
+    border-bottom-left-radius: 4px;
+  }
+
+  .bubble-right {
+    background: #1a6b55;
+    color: #d1efe5;
+    align-self: flex-end;
+    border-bottom-right-radius: 4px;
+  }
+
+  .phone-label {
+    font-size: 0.6rem;
+    color: #6b8aaa;
+    margin-bottom: 2px;
+    padding: 0 2px;
+  }
+
+  .phone-label.right { text-align: right; }
+
+  .phone-bar {
+    margin-top: auto;
+    background: #1e2d3d;
+    border-radius: 12px;
+    padding: 8px 12px;
+    display: flex; align-items: center; gap: 8px;
+  }
+
+  .phone-bar-icons { display: flex; gap: 6px; margin-left: auto; }
+
+  .phone-bar-icon {
+    width: 28px; height: 28px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .phone-bar-icon.green { background: rgba(62,207,158,0.15); }
+  .phone-bar-icon.blue { background: rgba(59,130,246,0.15); }
+
+  .phone-bar-icon svg { width: 14px; height: 14px; fill: none; stroke-width: 2; stroke-linecap: round; }
+
+  .phone-orbit {
+    position: absolute;
+    background: white;
+    border-radius: var(--radius);
+    padding: 10px 14px;
+    font-size: 0.72rem; font-weight: 500;
+    box-shadow: 0 8px 24px rgba(13,17,23,0.12);
+    display: flex; align-items: center; gap: 8px;
+    white-space: nowrap;
+  }
+
+  .phone-orbit.top-left { top: 50px; left: -90px; animation: floatChip 3.5s ease-in-out infinite; }
+  .phone-orbit.bottom-right { bottom: 80px; right: -90px; animation: floatChip 3.5s ease-in-out infinite 1.5s; }
+
+  @keyframes floatChip {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+
+  .orbit-dot {
+    width: 28px; height: 28px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: 6rem 6rem; }
+
+  .section-tag {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 0.75rem; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+
+  .section-tag::before {
+    content: '';
+    display: block;
+    width: 20px; height: 2px;
+    background: var(--accent);
+    border-radius: 1px;
+  }
+
+  h2 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.9rem, 3vw, 2.8rem);
+    letter-spacing: -0.025em;
+    line-height: 1.15;
+    color: var(--ink);
+    margin-bottom: 1rem;
+  }
+
+  .section-lead {
+    font-size: 1.05rem;
+    color: var(--ink-soft);
+    font-weight: 300;
+    max-width: 560px;
+    line-height: 1.8;
+    margin-bottom: 3.5rem;
+  }
+
+  /* ── FEATURES ── */
+  #features { background: var(--white); }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5px;
+    background: var(--border);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  .feature-card {
+    background: var(--white);
+    padding: 2rem;
+    transition: background 0.2s;
+  }
+
+  .feature-card:hover { background: var(--surface); }
+
+  .feature-icon {
+    width: 48px; height: 48px;
+    border-radius: var(--radius-sm);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1.25rem;
+  }
+
+  .feature-icon svg { width: 22px; height: 22px; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+  .feature-icon.green { background: var(--accent-light); }
+  .feature-icon.green svg { stroke: var(--accent); }
+  .feature-icon.amber { background: var(--amber-light); }
+  .feature-icon.amber svg { stroke: var(--amber); }
+  .feature-icon.blue { background: var(--blue-light); }
+  .feature-icon.blue svg { stroke: var(--blue); }
+  .feature-icon.coral { background: var(--coral-light); }
+  .feature-icon.coral svg { stroke: var(--coral); }
+
+  .feature-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.05rem; font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.01em;
+  }
+
+  .feature-desc {
+    font-size: 0.9rem;
+    color: var(--ink-muted);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  /* ── HOW IT WORKS ── */
+  #how-it-works { background: var(--surface); }
+
+  .hiw-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  .steps-list { display: flex; flex-direction: column; gap: 0; }
+
+  .step-item {
+    display: flex; gap: 1.5rem;
+    padding: 1.75rem 0;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+
+  .step-item:last-child { border-bottom: none; }
+
+  .step-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.75rem; font-weight: 700;
+    color: var(--accent);
+    min-width: 32px; height: 32px;
+    background: var(--accent-light);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    letter-spacing: 0;
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+
+  .step-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem; font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.4rem;
+    letter-spacing: -0.01em;
+  }
+
+  .step-desc { font-size: 0.88rem; color: var(--ink-muted); font-weight: 300; line-height: 1.7; }
+
+  .hiw-visual {
+    background: var(--ink);
+    border-radius: 24px;
+    padding: 2.5rem;
+    min-height: 420px;
+    display: flex; flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hiw-visual::before {
+    content: '';
+    position: absolute; top: -60px; right: -60px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: rgba(62,207,158,0.08);
+  }
+
+  .hiw-flow {
+    display: flex; flex-direction: column; gap: 1rem;
+  }
+
+  .flow-node {
+    border-radius: 12px;
+    padding: 12px 16px;
+    font-size: 0.82rem; font-weight: 500;
+    display: flex; align-items: center; gap: 10px;
+  }
+
+  .flow-node.deaf { background: rgba(59,130,246,0.15); color: #93c5fd; }
+  .flow-node.process { background: rgba(62,207,158,0.12); color: #6ee7c8; }
+  .flow-node.blind { background: rgba(251,191,36,0.12); color: #fcd34d; }
+
+  .flow-arrow {
+    text-align: center;
+    color: rgba(255,255,255,0.2);
+    font-size: 1.2rem;
+    line-height: 1;
+  }
+
+  .flow-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .flow-node.deaf .flow-dot { background: #93c5fd; }
+  .flow-node.process .flow-dot { background: #6ee7c8; }
+  .flow-node.blind .flow-dot { background: #fcd34d; }
+
+  .hiw-footer-label {
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.3);
+    text-align: center;
+    margin-top: 1rem;
+    font-weight: 400;
+  }
+
+  /* ── AI MODELS ── */
+  #ai-models { background: var(--white); }
+
+  .models-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .model-card {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 2rem;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .model-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+
+  .model-badge {
+    display: inline-block;
+    font-size: 0.68rem; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    border-radius: var(--radius-pill);
+    padding: 4px 10px;
+    margin-bottom: 1.25rem;
+  }
+
+  .model-badge.yolo { background: var(--accent-light); color: var(--accent); }
+  .model-badge.tflite { background: var(--blue-light); color: var(--blue); }
+  .model-badge.roboflow { background: var(--amber-light); color: var(--amber); }
+
+  .model-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.35rem; font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 0.75rem;
+  }
+
+  .model-desc {
+    font-size: 0.88rem; color: var(--ink-muted);
+    line-height: 1.7; font-weight: 300;
+    margin-bottom: 1.5rem;
+  }
+
+  .model-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+
+  .tag {
+    font-size: 0.72rem; font-weight: 500;
+    background: var(--white);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-pill);
+    padding: 3px 10px;
+    color: var(--ink-soft);
+  }
+
+  /* ── TEAM ── */
+  #team { background: var(--surface); }
+
+  .team-intro {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: start;
+    margin-bottom: 4rem;
+  }
+
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+
+  .team-card {
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+
+  .team-card:hover { transform: translateY(-3px); border-color: rgba(26,107,85,0.3); }
+
+  .team-avatar {
+    height: 100px;
+    display: flex; align-items: flex-end; justify-content: center;
+    padding-bottom: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .avatar-bg {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .avatar-initials {
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem; font-weight: 700;
+    color: white;
+    z-index: 2;
+    position: absolute;
+    bottom: -20px;
+    border: 3px solid white;
+  }
+
+  .team-info { padding: 1.75rem 1.25rem 1.25rem; }
+
+  .team-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.92rem; font-weight: 700;
+    color: var(--ink); margin-bottom: 3px;
+  }
+
+  .team-role {
+    font-size: 0.78rem; color: var(--ink-muted);
+    font-weight: 300;
+  }
+
+  /* ── ABSTRACT ── */
+  #abstract {
+    background: var(--ink);
+    color: white;
+  }
+
+  #abstract .section-tag { color: #3ecf9e; }
+  #abstract .section-tag::before { background: #3ecf9e; }
+  #abstract h2 { color: white; }
+
+  .abstract-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .abstract-text {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.65);
+    font-weight: 300;
+    line-height: 1.9;
+  }
+
+  .abstract-highlight {
+    color: #3ecf9e;
+    font-style: italic;
+  }
+
+  .tech-stack {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .tech-item {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: var(--radius-sm);
+    padding: 1rem 1.25rem;
+  }
+
+  .tech-item-label {
+    font-size: 0.68rem; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+    margin-bottom: 4px;
+  }
+
+  .tech-item-value {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.88rem; font-weight: 600;
+    color: rgba(255,255,255,0.85);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 3rem 6rem;
+    display: flex;
+    align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 1.5rem;
+  }
+
+  .footer-brand {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700; font-size: 1.1rem;
+    color: white;
+  }
+
+  .footer-brand span { color: #3ecf9e; }
+
+  .footer-copy {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.3);
+    font-weight: 300;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1024px) {
+    #hero, section { padding: 4rem 2.5rem; }
+    #hero { grid-template-columns: 1fr; min-height: auto; padding-top: 4rem; }
+    .hero-visual { display: none; }
+    .features-grid { grid-template-columns: 1fr 1fr; }
+    .models-grid { grid-template-columns: 1fr; }
+    .team-grid { grid-template-columns: repeat(2, 1fr); }
+    .abstract-grid, .hiw-container, .team-intro { grid-template-columns: 1fr; gap: 2.5rem; }
+    footer { padding: 2.5rem; }
+  }
+
+  @media (max-width: 640px) {
+    nav { padding: 0 1.25rem; }
+    .nav-links { display: none; }
+    #hero, section { padding: 3rem 1.5rem; }
+    .features-grid { grid-template-columns: 1fr; }
+    .team-grid { grid-template-columns: repeat(2, 1fr); }
+    footer { padding: 2rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">
+    <div class="nav-logo-icon">
+      <svg viewBox="0 0 20 20">
+        <path d="M5 10 Q10 4 15 10 Q10 16 5 10Z"/>
+        <circle cx="10" cy="10" r="2.5" fill="white" stroke="none"/>
+        <path d="M2 14 L5 10 M18 14 L15 10" stroke-width="1.8"/>
+      </svg>
+    </div>
+    Smart Bridge
+  </a>
+  <ul class="nav-links">
+    <li><a href="#features">Features</a></li>
+    <li><a href="#how-it-works">How It Works</a></li>
+    <li><a href="#ai-models">AI Models</a></li>
+    <li><a href="#team">Team</a></li>
+    <li><a href="#abstract">Abstract</a></li>
+  </ul>
+  <a href="#abstract" class="btn-primary" style="font-size:0.82rem; padding: 9px 20px;">View Research</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <span class="hero-eyebrow-dot"></span>
+      Thesis Research Project · 2024
+    </div>
+    <h1>
+      Bridging<br>
+      <span class="accent-word">Silence</span><br>
+      and Sight
+    </h1>
+    <p class="hero-desc">
+      Smart Bridge is an AI-powered mobile application enabling two-way, real-time communication between blind and deaf individuals — breaking down one of accessibility's most invisible barriers.
+    </p>
+    <div class="hero-cta-group">
+      <a href="#features" class="btn-primary">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        Explore Features
+      </a>
+      <a href="#abstract" class="btn-outline">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" viewBox="0 0 24 24"><path d="M9 12h6M9 16h4M5 8h14M3 5h18v14H3z"/></svg>
+        Read Abstract
+      </a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="hero-stat-num">3</div>
+        <div class="hero-stat-label">AI Models</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">4</div>
+        <div class="hero-stat-label">Core Features</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">2-way</div>
+        <div class="hero-stat-label">Communication</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <!-- Float chip top left -->
+    <div class="phone-orbit top-left">
+      <div class="orbit-dot" style="background:#e1f5ee;">🤟</div>
+      Sign detected
+    </div>
+
+    <!-- Phone mockup -->
+    <div class="phone-frame">
+      <div class="phone-screen">
+        <div class="phone-notch"></div>
+        <div class="phone-ui">
+          <div class="phone-header">Smart <span>Bridge</span></div>
+
+          <div class="phone-label">Deaf User</div>
+          <div class="phone-chat-bubble bubble-left">
+            🤟 Sign language detected:<br>
+            <strong style="color:#93c5fd">"Hello, how are you?"</strong>
+          </div>
+
+          <div class="phone-label right">Blind User</div>
+          <div class="phone-chat-bubble bubble-right">
+            🔊 Spoken response:<br>
+            <strong style="color:#a7f3d0">"I'm good, thanks!"</strong>
+          </div>
+
+          <div class="phone-label">AI Translation</div>
+          <div class="phone-chat-bubble bubble-left">
+            ✅ TFLite model active — Sign → Sentence in 0.3s
+          </div>
+
+          <div class="phone-bar">
+            <span style="font-size:0.65rem; color:#6b8aaa;">Live session</span>
+            <div class="phone-bar-icons">
+              <div class="phone-bar-icon green">
+                <svg viewBox="0 0 24 24" stroke="#3ecf9e"><path d="M12 1v3M12 20v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M1 12h3M20 12h3"/><circle cx="12" cy="12" r="5"/></svg>
+              </div>
+              <div class="phone-bar-icon blue">
+                <svg viewBox="0 0 24 24" stroke="#60a5fa"><path d="M12 2a3 3 0 0 1 3 3v6a3 3 0 0 1-6 0V5a3 3 0 0 1 3-3z"/><path d="M19 10a7 7 0 0 1-14 0M12 19v4M8 23h8"/></svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Float chip bottom right -->
+    <div class="phone-orbit bottom-right">
+      <div class="orbit-dot" style="background:#faeeda;">🔊</div>
+      TTS output ready
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="section-tag">Features</div>
+  <h2>One App, Every Voice</h2>
+  <p class="section-lead">Four intelligent features work in concert to enable natural, real-time communication regardless of sensory ability.</p>
+
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon green">
+        <svg viewBox="0 0 24 24"><path d="M12 2a3 3 0 0 1 3 3v6a3 3 0 0 1-6 0V5a3 3 0 0 1 3-3z"/><path d="M19 10a7 7 0 0 1-14 0M12 19v4M8 23h8"/></svg>
+      </div>
+      <div class="feature-title">Speech to Text</div>
+      <p class="feature-desc">Captures spoken language from the blind user in real time and converts it to readable text, delivering messages instantly to the deaf user's screen.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon amber">
+        <svg viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+      </div>
+      <div class="feature-title">Text to Speech</div>
+      <p class="feature-desc">Converts incoming text and sign language translations into natural-sounding audio, giving the blind user a full auditory experience of the conversation.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon blue">
+        <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><path d="M7 2v20M2 12h5M17 2v20M12 7h5M12 17h5M12 12h5"/></svg>
+      </div>
+      <div class="feature-title">Sign Language Translator</div>
+      <p class="feature-desc">Uses YOLOv8 and TFLite computer vision models to detect and classify hand signs in real time through the device camera with high-accuracy recognition.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon coral">
+        <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      </div>
+      <div class="feature-title">Sign → Sentence</div>
+      <p class="feature-desc">Sequences individual sign classifications into grammatically coherent sentences, transforming isolated gestures into full, meaningful communication.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon green">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      </div>
+      <div class="feature-title">Roboflow API Integration</div>
+      <p class="feature-desc">Leverages Roboflow's cloud inference API as a third model tier for additional sign classification accuracy and extended gesture vocabulary coverage.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon amber">
+        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </div>
+      <div class="feature-title">Bidirectional Channel</div>
+      <p class="feature-desc">Both users operate simultaneously — the deaf user signs while the blind user speaks — enabling a fluid, natural conversation without turn-based constraints.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how-it-works">
+  <div class="hiw-container">
+    <div>
+      <div class="section-tag">How It Works</div>
+      <h2>Communication in Four Steps</h2>
+      <p class="section-lead">Smart Bridge handles the translation layer invisibly, so both users can focus on the conversation.</p>
+
+      <div class="steps-list">
+        <div class="step-item">
+          <div class="step-num">01</div>
+          <div>
+            <div class="step-title">Input Capture</div>
+            <p class="step-desc">The deaf user performs hand signs in front of the camera. The blind user speaks naturally into the microphone. Both channels are active simultaneously.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">02</div>
+          <div>
+            <div class="step-title">AI Processing</div>
+            <p class="step-desc">YOLOv8 and TFLite models classify the hand signs frame-by-frame. The speech engine transcribes audio to text in real time with minimal latency.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">03</div>
+          <div>
+            <div class="step-title">Translation & Assembly</div>
+            <p class="step-desc">Individual sign labels are assembled into full sentences. Text is packaged for Text-to-Speech output. Roboflow API supplements classification confidence.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">04</div>
+          <div>
+            <div class="step-title">Delivery</div>
+            <p class="step-desc">The deaf user reads translated speech on screen. The blind user hears translated signs spoken aloud. Communication flows both ways, seamlessly.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hiw-visual">
+      <div style="font-family: 'Syne', sans-serif; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 1.5rem;">Live communication flow</div>
+
+      <div class="hiw-flow">
+        <div class="flow-node deaf">
+          <span class="flow-dot"></span>
+          🧏 Deaf user performs sign language
+        </div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-node process">
+          <span class="flow-dot"></span>
+          📷 YOLOv8 + TFLite detect hand sign
+        </div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-node process">
+          <span class="flow-dot"></span>
+          🌐 Roboflow API validates classification
+        </div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-node process">
+          <span class="flow-dot"></span>
+          🔤 Signs assembled into sentence
+        </div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-node blind">
+          <span class="flow-dot"></span>
+          🔊 TTS delivers message to blind user
+        </div>
+      </div>
+
+      <div class="hiw-footer-label">Reverse flow: Speech → STT → Screen text → Deaf user</div>
+    </div>
+  </div>
+</section>
+
+<!-- AI MODELS -->
+<section id="ai-models">
+  <div class="section-tag">AI Models</div>
+  <h2>Three Models, One Pipeline</h2>
+  <p class="section-lead">Smart Bridge combines on-device inference and cloud API to maximize sign language recognition accuracy across varied environments.</p>
+
+  <div class="models-grid">
+    <div class="model-card">
+      <div class="model-badge yolo">On-Device · Object Detection</div>
+      <div class="model-title">YOLOv8</div>
+      <p class="model-desc">You Only Look Once v8 serves as the primary real-time hand sign detector. Running locally on the device, it processes camera frames at high frame rates to identify and localize hand positions with bounding-box precision — critical for latency-sensitive communication.</p>
+      <div class="model-tags">
+        <span class="tag">Real-time detection</span>
+        <span class="tag">On-device inference</span>
+        <span class="tag">Bounding boxes</span>
+        <span class="tag">Low latency</span>
+        <span class="tag">Flutter compatible</span>
+      </div>
+    </div>
+
+    <div class="model-card">
+      <div class="model-badge tflite">On-Device · Classification</div>
+      <div class="model-title">TensorFlow Lite</div>
+      <p class="model-desc">A lightweight TFLite classification model runs directly on the mobile device without network dependency, making it robust for offline use. It classifies detected hand regions into sign labels, optimized for mobile hardware via quantization and pruning.</p>
+      <div class="model-tags">
+        <span class="tag">Mobile optimized</span>
+        <span class="tag">Offline capable</span>
+        <span class="tag">Quantized model</span>
+        <span class="tag">Sign classification</span>
+        <span class="tag">Fast inference</span>
+      </div>
+    </div>
+
+    <div class="model-card">
+      <div class="model-badge roboflow">Cloud API · Inference</div>
+      <div class="model-title">Roboflow API</div>
+      <p class="model-desc">Roboflow's hosted inference API acts as a third-layer validator and extends the app's gesture vocabulary beyond on-device capacity. HTTP API calls deliver cloud-powered classification results, augmenting confidence scores and covering edge-case signs.</p>
+      <div class="model-tags">
+        <span class="tag">Cloud inference</span>
+        <span class="tag">HTTP REST API</span>
+        <span class="tag">Extended vocabulary</span>
+        <span class="tag">Confidence scoring</span>
+        <span class="tag">Model hosting</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section id="team">
+  <div class="section-tag">Meet the Team</div>
+  <h2>The Researchers Behind Smart Bridge</h2>
+  <p class="section-lead" style="margin-bottom:3rem;">A dedicated group of student researchers and their adviser, working to make communication universally accessible.</p>
+
+  <div class="team-grid">
+    <div class="team-card">
+      <div class="team-avatar">
+        <div class="avatar-bg" style="background: linear-gradient(135deg, #e1f5ee 0%, #9fe1cb 100%);"></div>
+        <div class="avatar-initials" style="background: var(--accent);">FG</div>
+      </div>
+      <div class="team-info">
+        <div class="team-name">France Gabriel R. Francisco</div>
+        <div class="team-role">Project Manager</div>
+      </div>
+    </div>
+
+    <div class="team-card">
+      <div class="team-avatar">
+        <div class="avatar-bg" style="background: linear-gradient(135deg, #e6f1fb 0%, #b5d4f4 100%);"></div>
+        <div class="avatar-initials" style="background: var(--blue);">JR</div>
+      </div>
+      <div class="team-info">
+        <div class="team-name">John Raphael C. Alido</div>
+        <div class="team-role">Document Specialist</div>
+      </div>
+    </div>
+
+    <div class="team-card">
+      <div class="team-avatar">
+        <div class="avatar-bg" style="background: linear-gradient(135deg, #faeeda 0%, #fac775 100%);"></div>
+        <div class="avatar-initials" style="background: var(--amber);">CJ</div>
+      </div>
+      <div class="team-info">
+        <div class="team-name">Carl Justin N. Gayo</div>
+        <div class="team-role">Quality Assurance</div>
+      </div>
+    </div>
+
+    <div class="team-card">
+      <div class="team-avatar">
+        <div class="avatar-bg" style="background: linear-gradient(135deg, #faece7 0%, #f4a482 100%);"></div>
+        <div class="avatar-initials" style="background: var(--coral);">MA</div>
+      </div>
+      <div class="team-info">
+        <div class="team-name">Mark Angelo T. Medallion</div>
+        <div class="team-role">Model Trainer</div>
+      </div>
+    </div>
+
+    <div class="team-card">
+      <div class="team-avatar">
+        <div class="avatar-bg" style="background: linear-gradient(135deg, #f3e8ff 0%, #d8b4fe 100%);"></div>
+        <div class="avatar-initials" style="background: #7c3aed;">BO</div>
+      </div>
+      <div class="team-info">
+        <div class="team-name">Mr. Barry A. Orozco</div>
+        <div class="team-role">Thesis Adviser</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABSTRACT -->
+<section id="abstract">
+  <div class="abstract-grid">
+    <div>
+      <div class="section-tag">Abstract</div>
+      <h2 style="margin-bottom:1.5rem;">Research Overview</h2>
+      <p class="abstract-text">
+        Smart Bridge addresses a <span class="abstract-highlight">critical gap in accessibility technology</span>: the absence of a unified communication channel between individuals who are blind and individuals who are deaf. Existing assistive technologies serve each group independently but fail to enable direct interaction between them.
+        <br><br>
+        This study presents the design, implementation, and evaluation of a mobile application that integrates <span class="abstract-highlight">computer vision, speech processing, and machine learning</span> to enable bidirectional communication in real time. Three model tiers — YOLOv8, TensorFlow Lite, and Roboflow's hosted API — provide layered sign language recognition with redundancy and extended vocabulary.
+        <br><br>
+        Text-to-Speech and Speech-to-Text modules handle the acoustic channel, while the Sign-to-Sentence pipeline transforms sequential gesture classifications into coherent natural language. The system was evaluated for recognition accuracy, response latency, and usability across both target user groups.
+      </p>
+    </div>
+
+    <div>
+      <div style="font-family: 'Syne', sans-serif; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 1.25rem;">Technical Specifications</div>
+      <div class="tech-stack">
+        <div class="tech-item">
+          <div class="tech-item-label">Platform</div>
+          <div class="tech-item-value">Flutter (iOS & Android)</div>
+        </div>
+        <div class="tech-item">
+          <div class="tech-item-label">Primary Model</div>
+          <div class="tech-item-value">YOLOv8</div>
+        </div>
+        <div class="tech-item">
+          <div class="tech-item-label">On-device ML</div>
+          <div class="tech-item-value">TensorFlow Lite</div>
+        </div>
+        <div class="tech-item">
+          <div class="tech-item-label">Cloud Inference</div>
+          <div class="tech-item-value">Roboflow HTTP API</div>
+        </div>
+        <div class="tech-item">
+          <div class="tech-item-label">Speech Engine</div>
+          <div class="tech-item-value">TTS + STT</div>
+        </div>
+        <div class="tech-item">
+          <div class="tech-item-label">Communication</div>
+          <div class="tech-item-value">Bidirectional</div>
+        </div>
+        <div class="tech-item">
+          <div class="tech-item-label">Target Users</div>
+          <div class="tech-item-value">Blind + Deaf</div>
+        </div>
+        <div class="tech-item">
+          <div class="tech-item-label">Study Type</div>
+          <div class="tech-item-value">Applied Research</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">Smart<span>Bridge</span></div>
+  <div class="footer-copy">Undergraduate Thesis Research · All rights reserved.</div>
+</footer>
+
+</body>
+</html>
