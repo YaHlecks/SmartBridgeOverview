@@ -716,6 +716,213 @@
     font-weight: 300;
   }
 
+  /* ── SOURCE CODE ── */
+  #source-code { background: var(--ink); color: white; }
+  #source-code .section-tag { color: #3ecf9e; }
+  #source-code .section-tag::before { background: #3ecf9e; }
+  #source-code h2 { color: white; }
+  #source-code .section-lead { color: rgba(255,255,255,0.5); }
+
+  .code-overview-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: 4rem;
+    align-items: start;
+    margin-bottom: 3rem;
+  }
+
+  .code-stats-row {
+    display: flex; gap: 2rem; flex-wrap: wrap;
+    margin-bottom: 2.5rem;
+  }
+
+  .code-stat {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: var(--radius-sm);
+    padding: 1rem 1.5rem;
+    min-width: 120px;
+  }
+
+  .code-stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.6rem; font-weight: 700;
+    color: #3ecf9e; line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .code-stat-label {
+    font-size: 0.72rem; font-weight: 500;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+  }
+
+  .code-imports {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: var(--radius);
+    padding: 1.5rem 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .code-imports-title {
+    font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em;
+    text-transform: uppercase; color: rgba(255,255,255,0.3);
+    margin-bottom: 1rem;
+  }
+
+  .import-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+
+  .import-chip {
+    font-size: 0.72rem; font-weight: 500;
+    border-radius: var(--radius-pill);
+    padding: 4px 10px;
+  }
+
+  .import-chip.flutter { background: rgba(59,130,246,0.15); color: #93c5fd; border: 1px solid rgba(59,130,246,0.2); }
+  .import-chip.plugin { background: rgba(62,207,158,0.12); color: #6ee7c8; border: 1px solid rgba(62,207,158,0.15); }
+  .import-chip.local { background: rgba(251,191,36,0.1); color: #fcd34d; border: 1px solid rgba(251,191,36,0.15); }
+
+  .classes-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .class-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: var(--radius);
+    padding: 1.25rem 1.5rem;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .class-card:hover { border-color: rgba(62,207,158,0.3); background: rgba(62,207,158,0.04); }
+
+  .class-card-type {
+    font-size: 0.65rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .class-card-type.widget { color: #6ee7c8; }
+  .class-card-type.stateful { color: #93c5fd; }
+  .class-card-type.data { color: #fcd34d; }
+  .class-card-type.page { color: #f9a8d4; }
+
+  .class-card-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.92rem; font-weight: 700;
+    color: white; margin-bottom: 4px;
+    letter-spacing: -0.01em;
+  }
+
+  .class-card-desc {
+    font-size: 0.78rem; color: rgba(255,255,255,0.4);
+    font-weight: 300; line-height: 1.5;
+  }
+
+  .prefs-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .pref-item {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: var(--radius-sm);
+    padding: 0.9rem 1rem;
+  }
+
+  .pref-type {
+    font-size: 0.62rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+    color: rgba(62,207,158,0.7); margin-bottom: 3px;
+  }
+
+  .pref-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.8rem; font-weight: 600; color: rgba(255,255,255,0.8);
+  }
+
+  .dart-block {
+    background: #0d1117;
+    border: 1px solid rgba(255,255,255,0.06);
+    border-left: 3px solid #3ecf9e;
+    border-radius: var(--radius);
+    padding: 1.5rem 2rem;
+    overflow-x: auto;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.78rem;
+    line-height: 1.75;
+    margin-bottom: 1.5rem;
+  }
+
+  .dart-keyword { color: #ff7b72; }
+  .dart-class-name { color: #ffa657; }
+  .dart-string { color: #a5d6ff; }
+  .dart-comment { color: #8b949e; font-style: italic; }
+  .dart-type { color: #79c0ff; }
+  .dart-func { color: #d2a8ff; }
+  .dart-const { color: #6ee7c8; }
+  .dart-param { color: #e3b341; }
+
+  .code-section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.85rem; font-weight: 700;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin: 2.5rem 0 1rem;
+    display: flex; align-items: center; gap: 10px;
+  }
+
+  .code-section-title::after {
+    content: ''; flex: 1;
+    height: 1px; background: rgba(255,255,255,0.07);
+  }
+
+  .flow-pipeline {
+    display: flex; align-items: center; flex-wrap: wrap;
+    gap: 0;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: var(--radius);
+    padding: 1.5rem 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .pipeline-step {
+    display: flex; flex-direction: column; align-items: center;
+    text-align: center; padding: 0 1rem;
+    flex: 1; min-width: 100px;
+  }
+
+  .pipeline-step-icon {
+    width: 42px; height: 42px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    margin-bottom: 8px;
+  }
+
+  .pipeline-step-label {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.7rem; font-weight: 700;
+    color: rgba(255,255,255,0.7);
+    letter-spacing: 0.03em;
+  }
+
+  .pipeline-step-sub {
+    font-size: 0.62rem; color: rgba(255,255,255,0.3);
+    margin-top: 2px;
+  }
+
+  .pipeline-arrow {
+    color: rgba(255,255,255,0.15); font-size: 1.3rem; flex-shrink: 0;
+  }
+
   /* ── RESPONSIVE ── */
   @media (max-width: 1024px) {
     #hero, section { padding: 4rem 2.5rem; }
@@ -725,6 +932,9 @@
     .models-grid { grid-template-columns: 1fr; }
     .team-grid { grid-template-columns: repeat(2, 1fr); }
     .abstract-grid, .hiw-container, .team-intro { grid-template-columns: 1fr; gap: 2.5rem; }
+    .code-overview-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .classes-grid { grid-template-columns: 1fr 1fr; }
+    .prefs-grid { grid-template-columns: 1fr 1fr; }
     footer { padding: 2.5rem; }
   }
 
@@ -734,6 +944,8 @@
     #hero, section { padding: 3rem 1.5rem; }
     .features-grid { grid-template-columns: 1fr; }
     .team-grid { grid-template-columns: repeat(2, 1fr); }
+    .classes-grid { grid-template-columns: 1fr; }
+    .prefs-grid { grid-template-columns: 1fr; }
     footer { padding: 2rem 1.5rem; }
   }
 </style>
@@ -758,6 +970,7 @@
     <li><a href="#ai-models">AI Models</a></li>
     <li><a href="#team">Team</a></li>
     <li><a href="#abstract">Abstract</a></li>
+    <li><a href="#source-code">Source Code</a></li>
   </ul>
   <a href="#abstract" class="btn-primary" style="font-size:0.82rem; padding: 9px 20px;">View Research</a>
 </nav>
@@ -1154,6 +1367,267 @@
       </div>
     </div>
   </div>
+</section>
+
+<!-- SOURCE CODE OVERVIEW -->
+<section id="source-code">
+  <div class="section-tag">Source Code</div>
+  <h2>main.dart — App Architecture Overview</h2>
+  <p class="section-lead">A deep-dive into the Flutter application's entry point: widget tree, preferences, state management, and the sign-to-speech translation pipeline.</p>
+
+  <!-- Stats row -->
+  <div class="code-stats-row">
+    <div class="code-stat">
+      <div class="code-stat-num">2,819</div>
+      <div class="code-stat-label">Lines of Code</div>
+    </div>
+    <div class="code-stat">
+      <div class="code-stat-num">17</div>
+      <div class="code-stat-label">Classes</div>
+    </div>
+    <div class="code-stat">
+      <div class="code-stat-num">12</div>
+      <div class="code-stat-label">Preferences</div>
+    </div>
+    <div class="code-stat">
+      <div class="code-stat-num">4</div>
+      <div class="code-stat-label">App Pages</div>
+    </div>
+    <div class="code-stat">
+      <div class="code-stat-num">5</div>
+      <div class="code-stat-label">Onboarding Slides</div>
+    </div>
+  </div>
+
+  <!-- Imports -->
+  <div class="code-imports">
+    <div class="code-imports-title">Dependencies &amp; Imports</div>
+    <div class="import-chips">
+      <span class="import-chip flutter">dart:async</span>
+      <span class="import-chip flutter">package:camera</span>
+      <span class="import-chip flutter">package:flutter/foundation</span>
+      <span class="import-chip flutter">package:flutter/material</span>
+      <span class="import-chip flutter">package:flutter/services</span>
+      <span class="import-chip plugin">flutter_tts</span>
+      <span class="import-chip plugin">google_fonts</span>
+      <span class="import-chip plugin">package_info_plus</span>
+      <span class="import-chip plugin">shared_preferences</span>
+      <span class="import-chip plugin">speech_to_text</span>
+      <span class="import-chip local">services/camera_service.dart</span>
+      <span class="import-chip local">services/model_service.dart</span>
+      <span class="import-chip local">services/permission_handler.dart</span>
+    </div>
+  </div>
+
+  <div class="code-overview-grid">
+    <!-- LEFT: entry point + app tree -->
+    <div>
+      <div class="code-section-title">Entry Point</div>
+      <div class="dart-block">
+<span class="dart-keyword">void</span> <span class="dart-func">main</span>() {
+  <span class="dart-class-name">WidgetsFlutterBinding</span>.ensureInitialized();
+  <span class="dart-func">runApp</span>(<span class="dart-keyword">const</span> <span class="dart-class-name">MyApp</span>());
+}
+      </div>
+
+      <div class="code-section-title">Widget Tree</div>
+      <div class="dart-block">
+<span class="dart-class-name">MyApp</span>  <span class="dart-comment">// Root — loads prefs, builds theme</span>
+ └── <span class="dart-class-name">AppEntryGate</span>  <span class="dart-comment">// Checks onboarding + terms</span>
+      ├── <span class="dart-class-name">OnboardingFlow</span>  <span class="dart-comment">// 5-slide intro</span>
+      └── <span class="dart-class-name">SmartBridgeShell</span>  <span class="dart-comment">// Main scaffold</span>
+           ├── <span class="dart-class-name">TranslatorPage</span>  <span class="dart-comment">// Camera + STT/TTS</span>
+           ├── <span class="dart-class-name">HistoryPage</span>  <span class="dart-comment">// Translation log</span>
+           ├── <span class="dart-class-name">SettingsPage</span>  <span class="dart-comment">// User preferences</span>
+           └── <span class="dart-class-name">AboutPage</span>  <span class="dart-comment">// App info + guide</span>
+      </div>
+
+      <div class="code-section-title">Theme Seed</div>
+      <div class="dart-block">
+<span class="dart-keyword">static const</span> <span class="dart-class-name">Color</span> _seedColor =
+  <span class="dart-class-name">Color</span>(<span class="dart-string">0xFF0A7A75</span>);  <span class="dart-comment">// Teal brand color</span>
+
+<span class="dart-comment">// Light primary:  #006F69</span>
+<span class="dart-comment">// Dark primary:   #6AF6ED</span>
+<span class="dart-comment">// High contrast supported ✓</span>
+      </div>
+    </div>
+
+    <!-- RIGHT: AppUiPreferences -->
+    <div>
+      <div class="code-section-title">AppUiPreferences — Persisted Settings</div>
+      <div class="dart-block">
+<span class="dart-keyword">@immutable</span>
+<span class="dart-keyword">class</span> <span class="dart-class-name">AppUiPreferences</span> {
+  <span class="dart-keyword">const</span> <span class="dart-class-name">AppUiPreferences</span>({
+    <span class="dart-keyword">this</span>.themeMode = <span class="dart-class-name">ThemeMode</span>.system,
+    <span class="dart-keyword">this</span>.textScale = <span class="dart-const">1.0</span>,
+    <span class="dart-keyword">this</span>.highContrast = <span class="dart-const">false</span>,
+    <span class="dart-keyword">this</span>.reduceMotion = <span class="dart-const">false</span>,
+    <span class="dart-keyword">this</span>.hapticsEnabled = <span class="dart-const">true</span>,
+    <span class="dart-keyword">this</span>.autoSpeakSigns = <span class="dart-const">false</span>,
+    <span class="dart-keyword">this</span>.ttsRate = <span class="dart-const">0.5</span>,
+    <span class="dart-keyword">this</span>.ttsPitch = <span class="dart-const">1.0</span>,
+    <span class="dart-keyword">this</span>.ttsVolume = <span class="dart-const">1.0</span>,
+    <span class="dart-keyword">this</span>.recognitionThreshold = <span class="dart-const">35.0</span>,
+    <span class="dart-keyword">this</span>.historyConfidenceThreshold = <span class="dart-const">60.0</span>,
+    <span class="dart-keyword">this</span>.frameStride = <span class="dart-const">2</span>,
+  });
+
+  <span class="dart-comment">// Persisted via SharedPreferences</span>
+  <span class="dart-keyword">Future</span>&lt;<span class="dart-type">void</span>&gt; <span class="dart-func">save</span>(<span class="dart-class-name">SharedPreferences</span> prefs) <span class="dart-keyword">async</span> { ... }
+  <span class="dart-keyword">factory</span> <span class="dart-class-name">AppUiPreferences</span>.<span class="dart-func">fromSharedPreferences</span>(...) { ... }
+  <span class="dart-class-name">AppUiPreferences</span> <span class="dart-func">copyWith</span>({...}) { ... }
+}
+      </div>
+
+      <div class="prefs-grid">
+        <div class="pref-item"><div class="pref-type">ThemeMode</div><div class="pref-name">themeMode</div></div>
+        <div class="pref-item"><div class="pref-type">double</div><div class="pref-name">textScale</div></div>
+        <div class="pref-item"><div class="pref-type">bool</div><div class="pref-name">highContrast</div></div>
+        <div class="pref-item"><div class="pref-type">bool</div><div class="pref-name">reduceMotion</div></div>
+        <div class="pref-item"><div class="pref-type">bool</div><div class="pref-name">hapticsEnabled</div></div>
+        <div class="pref-item"><div class="pref-type">bool</div><div class="pref-name">autoSpeakSigns</div></div>
+        <div class="pref-item"><div class="pref-type">double</div><div class="pref-name">ttsRate</div></div>
+        <div class="pref-item"><div class="pref-type">double</div><div class="pref-name">ttsPitch</div></div>
+        <div class="pref-item"><div class="pref-type">double</div><div class="pref-name">ttsVolume</div></div>
+        <div class="pref-item"><div class="pref-type">double</div><div class="pref-name">recognitionThreshold</div></div>
+        <div class="pref-item"><div class="pref-type">double</div><div class="pref-name">historyConfidenceThreshold</div></div>
+        <div class="pref-item"><div class="pref-type">int</div><div class="pref-name">frameStride</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Class cards -->
+  <div class="code-section-title">All Classes in main.dart</div>
+  <div class="classes-grid">
+    <div class="class-card">
+      <div class="class-card-type widget">StatelessWidget</div>
+      <div class="class-card-name">SmartBridgeLogo</div>
+      <div class="class-card-desc">App icon widget with rounded container, asset image, and fallback icon. Reused across AppBar, onboarding, and About page.</div>
+    </div>
+    <div class="class-card">
+      <div class="class-card-type data">Immutable Data</div>
+      <div class="class-card-name">AppUiPreferences</div>
+      <div class="class-card-desc">Holds all user settings. Serialized to/from SharedPreferences via save() and fromSharedPreferences(). Supports copyWith() for immutable updates.</div>
+    </div>
+    <div class="class-card">
+      <div class="class-card-type stateful">StatefulWidget</div>
+      <div class="class-card-name">MyApp</div>
+      <div class="class-card-desc">Root widget. Loads preferences on init, builds light/dark MaterialApp themes from seed color #0A7A75, handles text scaling.</div>
+    </div>
+    <div class="class-card">
+      <div class="class-card-type stateful">StatefulWidget</div>
+      <div class="class-card-name">AppEntryGate</div>
+      <div class="class-card-desc">Guards app entry. Shows OnboardingFlow if first launch or terms not accepted; otherwise routes to SmartBridgeShell.</div>
+    </div>
+    <div class="class-card">
+      <div class="class-card-type widget">StatelessWidget</div>
+      <div class="class-card-name">_LoadingScaffold</div>
+      <div class="class-card-desc">Simple centered loading spinner with a label. Shown during preference load and service initialization.</div>
+    </div>
+    <div class="class-card">
+      <div class="class-card-type stateful">StatefulWidget</div>
+      <div class="class-card-name">OnboardingFlow</div>
+      <div class="class-card-desc">5-slide PageView: Welcome → Workflow → Tutorial → Accessibility → Terms &amp; Conditions. Requires checkbox agreement to unlock Enter App.</div>
+    </div>
+    <div class="class-card">
+      <div class="class-card-type stateful">StatefulWidget</div>
+      <div class="class-card-name">SmartBridgeShell</div>
+      <div class="class-card-desc">Main scaffold with AppBar, bottom NavigationBar (4 tabs), and a PageView for swipe-based navigation. Holds shared history state.</div>
+    </div>
+    <div class="class-card">
+      <div class="class-card-type page">Page Widget</div>
+      <div class="class-card-name">TranslatorPage</div>
+      <div class="class-card-desc">Core feature page. Combines CameraService, ModelService, FlutterTts, and SpeechToText. Runs frame-by-frame sign recognition with configurable stride, threshold, and auto-speak.</div>
+    </div>
+    <div class="class-card">
+      <div class="class-card-type page">Page Widget</div>
+      <div class="class-card-name">HistoryPage</div>
+      <div class="class-card-desc">Displays a scrollable list of HistoryItem entries with type (sign/speech), text, timestamp, and confidence. Supports clear-all.</div>
+    </div>
+    <div class="class-card">
+      <div class="class-card-type page">Page Widget</div>
+      <div class="class-card-name">SettingsPage</div>
+      <div class="class-card-desc">Full preferences UI with labeled sliders for TTS rate/pitch/volume, recognition thresholds, text scale, toggles for high contrast, haptics, and motion.</div>
+    </div>
+    <div class="class-card">
+      <div class="class-card-type page">Page Widget</div>
+      <div class="class-card-name">AboutPage</div>
+      <div class="class-card-desc">App info, version (via PackageInfo), system functions list, hand-sign tutorial image, permissions summary, and terms notice.</div>
+    </div>
+    <div class="class-card">
+      <div class="class-card-type widget">StatelessWidget</div>
+      <div class="class-card-name">_LabeledSlider</div>
+      <div class="class-card-desc">Reusable settings slider component with label, value display, min/max, divisions, and onChange callback.</div>
+    </div>
+    <div class="class-card">
+      <div class="class-card-type data">Data Model</div>
+      <div class="class-card-name">HistoryItem</div>
+      <div class="class-card-desc">Stores a single translation event: type (sign/speech), text content, DateTime timestamp, and optional int confidence score.</div>
+    </div>
+  </div>
+
+  <!-- Frame processing pipeline -->
+  <div class="code-section-title">TranslatorPage — Frame Processing Pipeline</div>
+  <div class="flow-pipeline">
+    <div class="pipeline-step">
+      <div class="pipeline-step-icon" style="background:rgba(59,130,246,0.15);">📷</div>
+      <div class="pipeline-step-label">Camera Frame</div>
+      <div class="pipeline-step-sub">CameraService stream</div>
+    </div>
+    <div class="pipeline-arrow">→</div>
+    <div class="pipeline-step">
+      <div class="pipeline-step-icon" style="background:rgba(62,207,158,0.12);">🔢</div>
+      <div class="pipeline-step-label">Frame Stride</div>
+      <div class="pipeline-step-sub">Process every Nth frame</div>
+    </div>
+    <div class="pipeline-arrow">→</div>
+    <div class="pipeline-step">
+      <div class="pipeline-step-icon" style="background:rgba(251,191,36,0.1);">🧠</div>
+      <div class="pipeline-step-label">Model Inference</div>
+      <div class="pipeline-step-sub">TFLite / YOLOv8</div>
+    </div>
+    <div class="pipeline-arrow">→</div>
+    <div class="pipeline-step">
+      <div class="pipeline-step-icon" style="background:rgba(249,168,212,0.12);">📊</div>
+      <div class="pipeline-step-label">Top-K Predictions</div>
+      <div class="pipeline-step-sub">Confidence threshold</div>
+    </div>
+    <div class="pipeline-arrow">→</div>
+    <div class="pipeline-step">
+      <div class="pipeline-step-icon" style="background:rgba(62,207,158,0.12);">🔊</div>
+      <div class="pipeline-step-label">TTS / History</div>
+      <div class="pipeline-step-sub">auto-speak + log</div>
+    </div>
+  </div>
+
+  <!-- Translator state snippet -->
+  <div class="code-section-title">TranslatorPage — Key State Variables</div>
+  <div class="dart-block">
+<span class="dart-comment">// Services</span>
+<span class="dart-keyword">final</span> <span class="dart-class-name">SpeechToText</span> _speech = <span class="dart-class-name">SpeechToText</span>();
+<span class="dart-keyword">final</span> <span class="dart-class-name">FlutterTts</span> _tts = <span class="dart-class-name">FlutterTts</span>();
+<span class="dart-keyword">final</span> <span class="dart-class-name">CameraService</span> _cameraService = <span class="dart-class-name">CameraService</span>();
+<span class="dart-keyword">final</span> <span class="dart-class-name">ModelService</span> _modelService = <span class="dart-class-name">ModelService</span>();
+
+<span class="dart-comment">// UI state</span>
+<span class="dart-type">bool</span> _isListening = <span class="dart-const">false</span>;      <span class="dart-comment">// STT active</span>
+<span class="dart-type">bool</span> _isSpeaking = <span class="dart-const">false</span>;       <span class="dart-comment">// TTS active</span>
+<span class="dart-type">bool</span> _isCameraRunning = <span class="dart-const">false</span>;   <span class="dart-comment">// Live preview</span>
+<span class="dart-type">bool</span> _isModelLoaded = <span class="dart-const">false</span>;    <span class="dart-comment">// TFLite ready</span>
+<span class="dart-type">bool</span> _isFallbackMode = <span class="dart-const">false</span>;   <span class="dart-comment">// No camera/model</span>
+
+<span class="dart-comment">// Recognition</span>
+<span class="dart-type">String</span> _recognizedText = <span class="dart-string">''</span>;
+<span class="dart-type">List</span>&lt;<span class="dart-class-name">SignPrediction</span>&gt; _topPredictions = [];
+<span class="dart-type">int</span> _frameCounter = <span class="dart-const">0</span>;
+
+<span class="dart-comment">// Supported gestures:</span>
+<span class="dart-comment">// Open_Palm · Closed_Fist · Pointing_Up · Thumb_Up</span>
+<span class="dart-comment">// Thumb_Down · Victory · ILoveYou · None</span>
+  </div>
+
 </section>
 
 <!-- FOOTER -->
